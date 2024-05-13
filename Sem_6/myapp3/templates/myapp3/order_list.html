@@ -1,0 +1,29 @@
+!doctype html
+html lang=en
+  head
+    meta charset=UTF-8 
+    meta name=viewport content=width=device-width, initial-scale=1 
+    link href=cssstyle.css rel=stylesheet 
+    titleСписок заказов {{ client.name }}title
+  head
+  body
+    h1Список ваших заказов за последние {{ period }} днейh1
+    {% if orders %}
+    ul
+      {% for order in orders %}
+      li
+        div class=order-card
+          {% for product in order.products %}
+          divpТовар {{ product.title }}pdiv
+          {% endfor %}
+          divpОбщая стоимость {{ order.order_data.total_price }}pdiv
+          divpДата заказа {{ order.order_data.date_ordered }}pdiv
+        div
+      li
+      {% endfor %}
+    ul
+    {% else %}
+    divpСписок ваших заказов пустpdiv
+    {% endif %}
+  body
+html
